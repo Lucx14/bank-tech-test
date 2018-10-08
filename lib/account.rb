@@ -16,6 +16,7 @@ class Account
   def withdraw(amount)
     raise 'Error: amount must be entered as an integer' unless integer?(amount)
     raise 'Error: amount must be positive' unless positive?(amount)
+    raise 'Error: not enough money in account' if amount > balance
 
     @balance -= amount
   end

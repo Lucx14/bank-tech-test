@@ -26,6 +26,7 @@ describe 'User Stories' do
   # So that I can get cash when i need it
   # I want to be able to make a withdrawal from my account
   it 'so I can access my money, I want to make a withdrawal' do
+    account.deposit(1000)
     expect { account.withdraw(500) }.not_to raise_error
   end
 

@@ -24,6 +24,7 @@ describe Account do
 
   describe '#withdrawal' do
     it 'changes the balance by the amount' do
+      account.deposit(1000)
       expect { account.withdraw(500) }.to change { account.balance }.by(-500)
     end
     it 'only accepts integer values as argument' do
@@ -31,6 +32,10 @@ describe Account do
     end
     it 'only accepts positive numbers' do
       expect { account.withdraw(-500) }.to raise_error 'Error: amount must be positive'
+    end
+    it 'will not allow withdrawals larger than the current balance' do
+      account.deposit(1000)
+      expect { account.withdraw(1001) }.to raise_error 'Error: not enough money in account'
     end
 
   end
