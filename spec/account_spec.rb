@@ -44,6 +44,14 @@ describe Account do
       account.deposit(1000)
       expect { account.withdraw(1001) }.to raise_error 'Error: not enough money in account'
     end
+    it 'creates a record of the cashflow with date and resulting balance' do
+      allow(Time).to receive(:now).and_return(@time_now)
+      account.deposit(1000)
+      account.withdraw(500)
+      expect(account.cashflows.size).to eq(2)
+      expect(account.cashflows[1]).to eq({ :date => @time_now, :credit => nil, :debit => 500, :balance => 500 })
+
+    end
   end
 
   describe '#statement' do

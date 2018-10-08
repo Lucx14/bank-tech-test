@@ -26,6 +26,12 @@ class Account
     raise 'Error: not enough money in account' if amount > balance
 
     @balance -= amount
+    date = Time.now
+    debit = amount
+    cashflow = { date: date, credit: nil, debit: debit, balance: @balance }
+
+    @cashflows << cashflow
+    
   end
 
   def statement
