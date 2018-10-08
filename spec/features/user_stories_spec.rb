@@ -28,4 +28,8 @@ describe 'User Stories' do
   it 'so I can access my money, I want to make a withdrawal' do
     expect { account.withdraw(500) }.not_to raise_error
   end
+
+  # As a bank customer
+  # So that i can check my account history
+  # I want to be able to get a bank account statement that includes cash flows and dates and the balance
 end

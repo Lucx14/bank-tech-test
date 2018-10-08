@@ -14,15 +14,17 @@ describe Account do
     it 'adds money to the account balance' do
       expect { account.deposit(1000) }.to change { account.balance }.by(1000)
     end
+    it 'only accepts integer values as argument' do
+      expect { account.deposit("one thousand pounds") }.to raise_error 'Error: amount must be entered as an integer'
+    end
   end
 
   describe '#withdrawal' do
-    it 'withdraws money from the account' do
-      expect(account).to respond_to(:withdraw).with(1).argument
-    end
-
     it 'changes the balance by the amount' do
       expect { account.withdraw(500) }.to change { account.balance }.by(-500)
+    end
+    it 'only accepts integer values as argument' do
+      expect { account.withdraw("five hundred pounds") }.to raise_error 'Error: amount must be entered as an integer'
     end
   end
 end
