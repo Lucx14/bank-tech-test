@@ -18,7 +18,14 @@ describe 'User Stories' do
   # As a bank customer
   # So that I can check how much is in my account
   # I want to be able to check my current balance
-  it 'bank account owner can check the balance' do
+  it 'so I can see how much money I have, I want to check the balance' do
     expect(account.balance).to eq(0)
+  end
+
+  # As a bank customer
+  # So that I can get cash when i need it
+  # I want to be able to make a withdrawal from my account
+  it 'so I can access my money, I want to make a withdrawal' do
+    expect { account.withdraw(500) }.not_to raise_error
   end
 end
