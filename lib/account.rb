@@ -12,11 +12,11 @@ class Account
     raise 'Error: amount must be positive' unless positive?(amount)
 
     @balance += amount
-    date = Time.now
-    credit = amount
-    cashflow = { date: date, credit: credit, debit: nil, balance: @balance }
 
-    @cashflows << cashflow
+    @cashflows << { date: Time.now,
+                    credit: amount,
+                    debit: nil,
+                    balance: @balance }
 
   end
 
@@ -26,12 +26,12 @@ class Account
     raise 'Error: not enough money in account' if amount > balance
 
     @balance -= amount
-    date = Time.now
-    debit = amount
-    cashflow = { date: date, credit: nil, debit: debit, balance: @balance }
 
-    @cashflows << cashflow
-    
+    @cashflows << { date: Time.now,
+                    credit: nil,
+                    debit: amount,
+                    balance: @balance }
+
   end
 
   def statement
