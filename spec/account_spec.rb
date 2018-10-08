@@ -17,6 +17,9 @@ describe Account do
     it 'only accepts integer values as argument' do
       expect { account.deposit("one thousand pounds") }.to raise_error 'Error: amount must be entered as an integer'
     end
+    it 'only accepts positive numbers' do
+      expect { account.deposit(-1000) }.to raise_error 'Error: amount must be positive'
+    end
   end
 
   describe '#withdrawal' do
@@ -26,5 +29,9 @@ describe Account do
     it 'only accepts integer values as argument' do
       expect { account.withdraw("five hundred pounds") }.to raise_error 'Error: amount must be entered as an integer'
     end
+    it 'only accepts positive numbers' do
+      expect { account.withdraw(-500) }.to raise_error 'Error: amount must be positive'
+    end
+
   end
 end
