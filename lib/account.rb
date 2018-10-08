@@ -35,6 +35,8 @@ class Account
   end
 
   def statement
+    # puts "   date    || credit ||  debit  ||  balance  "
+    # cashflows.reverse.each { |cashflow| puts "#{cashflow[:date].strftime("%d/%m/%Y")} || #{cashflow[:credit]} || #{cashflow[:debit]} || #{cashflow[:balance]}" }
   end
 
   private
