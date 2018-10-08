@@ -20,6 +20,13 @@ describe Account do
     it 'only accepts positive numbers' do
       expect { account.deposit(-1000) }.to raise_error 'Error: amount must be positive'
     end
+    it 'creates a record of the cashflow with date and resulting balance' do
+      allow(Time).to receive(:now).and_return(@time_now)
+      account.deposit(1000)
+      expect(account.cashflows.size).to eq(1)
+      expect(account.cashflows[0]).to eq({ :date => @time_now, :credit => 1000, :debit => nil, :balance => 1000 })
+
+    end
   end
 
   describe '#withdrawal' do
@@ -37,6 +44,14 @@ describe Account do
       account.deposit(1000)
       expect { account.withdraw(1001) }.to raise_error 'Error: not enough money in account'
     end
+  end
 
+  describe '#statement' do
+    it 'prints out a statement of cashflows to the screen with amount, date and balance' do
+      account.deposit(1000)
+      account.deposit(2000)
+      account.withdraw(500)
+      expect(account).to respond_to(:statement)
+    end
   end
 end

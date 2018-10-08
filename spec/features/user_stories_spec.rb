@@ -33,4 +33,10 @@ describe 'User Stories' do
   # As a bank customer
   # So that i can check my account history
   # I want to be able to get a bank account statement that includes cash flows and dates and the balance
+  it 'so I can check my cashflows, I want to request a bank statement' do
+    account.deposit(1000)
+    account.deposit(2000)
+    account.withdraw(500)
+    expect { account.statement }.not_to raise_error
+  end
 end
