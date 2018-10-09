@@ -35,9 +35,13 @@ class Account
   end
 
   def statement
-    # puts "   date    || credit ||  debit  ||  balance  "
-    # cashflows.reverse.each { |cashflow| puts "#{cashflow[:date].strftime("%d/%m/%Y")} || #{cashflow[:credit]} || #{cashflow[:debit]} || #{cashflow[:balance]}" }
+    statement_headers
+    output = cashflows.reverse.each do |cashflow|
+       puts "#{date_format(cashflow[:date])} || #{decimalize(cashflow[:credit])} || #{decimalize(cashflow[:debit])} || #{decimalize(cashflow[:balance])}"
+    end
   end
+
+
 
   private
 
@@ -48,5 +52,24 @@ class Account
   def positive?(amount)
     amount > 0
   end
+
+  def statement_headers
+    headers = [:date, :credit, :debit, :balance]
+    puts headers.join(" || ")
+  end
+
+  def decimalize(input)
+    "%.2f" % (input.to_f) unless input == nil
+  end
+
+  def date_format(date)
+    date.strftime("%d/%m/%Y")
+  end
+
+
+
+
+
+
 
 end
