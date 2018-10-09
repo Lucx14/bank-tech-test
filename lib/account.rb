@@ -36,12 +36,10 @@ class Account
 
   def statement
     statement_headers
-    output = cashflows.reverse.each do |cashflow|
-       puts "#{date_format(cashflow[:date])} || #{decimalize(cashflow[:credit])} || #{decimalize(cashflow[:debit])} || #{decimalize(cashflow[:balance])}"
+    cashflows.reverse_each do |cashflow|
+      puts "#{date_format(cashflow[:date])} || #{decimalize(cashflow[:credit])} || #{decimalize(cashflow[:debit])} || #{decimalize(cashflow[:balance])}"
     end
   end
-
-
 
   private
 
@@ -59,17 +57,11 @@ class Account
   end
 
   def decimalize(input)
-    "%.2f" % (input.to_f) unless input == nil
+    "%.2f" % input.to_f unless input.nil?
   end
 
   def date_format(date)
     date.strftime("%d/%m/%Y")
   end
-
-
-
-
-
-
 
 end
