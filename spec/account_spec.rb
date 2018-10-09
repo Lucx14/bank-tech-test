@@ -25,7 +25,6 @@ describe Account do
       account.deposit(1000)
       expect(account.cashflows.size).to eq(1)
       expect(account.cashflows[0]).to eq({ :date => @time_now, :credit => 1000, :debit => nil, :balance => 1000 })
-
     end
   end
 
@@ -50,7 +49,6 @@ describe Account do
       account.withdraw(500)
       expect(account.cashflows.size).to eq(2)
       expect(account.cashflows[1]).to eq({ :date => @time_now, :credit => nil, :debit => 500, :balance => 500 })
-
     end
   end
 

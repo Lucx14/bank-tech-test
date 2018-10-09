@@ -8,4 +8,4 @@ on the morning of the second day, i have a single class (Account) program with a
 
 * I have tried to write both feature tests and unit tests, using the user stories i wrote to guide the feature tests. My thoughts at the moment are that maybe because i have only one class the feature tests seem a bit pointless.
 
-* My statement method involves a .each loop with a puts statement that i would like to make more readable if i can, will continue to look at how i can multi line that
+* My statement method involves a .each loop with a puts statement that i would like to make more readable if i can, will continue to look at how i can multi line that. Also because i use puts , im getting the statement output printing out inside my RSpec output which isnt very good visually.
