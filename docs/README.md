@@ -55,33 +55,31 @@ example usage in pry or irb
 [1] pry(main)> require './lib/account.rb'
 => true
 [2] pry(main)> account = Account.new
-=> #<Account:0x00007f8a8c0dae80 @balance=0, @cashflows=[]>
+=> #<Account:0x00007fccdb24c778 @balance=0, @cashflows=[]>
 [3] pry(main)> account.deposit(1000)
-=> [{:date=>2018-10-09 11:44:12 +0100, :credit=>1000, :debit=>nil, :balance=>1000}]
+=> [{:date=>2018-10-10 14:57:43 +0100, :credit=>1000, :debit=>nil, :balance=>1000}]
 [4] pry(main)> account.deposit(2000)
-=> [{:date=>2018-10-09 11:44:12 +0100, :credit=>1000, :debit=>nil, :balance=>1000},
- {:date=>2018-10-09 11:44:17 +0100, :credit=>2000, :debit=>nil, :balance=>3000}]
+=> [{:date=>2018-10-10 14:57:43 +0100, :credit=>1000, :debit=>nil, :balance=>1000},
+ {:date=>2018-10-10 14:57:46 +0100, :credit=>2000, :debit=>nil, :balance=>3000}]
 [5] pry(main)> account.withdraw(500)
-=> [{:date=>2018-10-09 11:44:12 +0100, :credit=>1000, :debit=>nil, :balance=>1000},
- {:date=>2018-10-09 11:44:17 +0100, :credit=>2000, :debit=>nil, :balance=>3000},
- {:date=>2018-10-09 11:44:24 +0100, :credit=>nil, :debit=>500, :balance=>2500}]
+=> [{:date=>2018-10-10 14:57:43 +0100, :credit=>1000, :debit=>nil, :balance=>1000},
+ {:date=>2018-10-10 14:57:46 +0100, :credit=>2000, :debit=>nil, :balance=>3000},
+ {:date=>2018-10-10 14:57:48 +0100, :credit=>nil, :debit=>500, :balance=>2500}]
 [6] pry(main)> account.statement
 date || credit || debit || balance
-09/10/2018 ||  || 500.00 || 2500.00
-09/10/2018 || 2000.00 ||  || 3000.00
-09/10/2018 || 1000.00 ||  || 1000.00
-=> [{:date=>2018-10-09 11:44:12 +0100, :credit=>1000, :debit=>nil, :balance=>1000},
- {:date=>2018-10-09 11:44:17 +0100, :credit=>2000, :debit=>nil, :balance=>3000},
- {:date=>2018-10-09 11:44:24 +0100, :credit=>nil, :debit=>500, :balance=>2500}]
+ 10/10/2018 ||  || 500.00 || 2500.00
+ 10/10/2018 || 2000.00 ||  || 3000.00
+ 10/10/2018 || 1000.00 ||  || 1000.00
+=> nil
+[7] pry(main)> account.balance
+=> 2500
 
- ```
+```
 
 To see test coverage run Rspec in the command line
 
 
 ```
-➜  bank-tech-test git:(master) ✗ rspec
-
 Account
   #initialize
     initializes a new account with a zero balance
@@ -97,24 +95,41 @@ Account
     will not allow withdrawals larger than the current balance
     creates a record of the cashflow with date and resulting balance
   #statement
+
+
     prints out a statement of cashflows to the screen with amount, date and balance
 
 User Stories
-  so I can manage my finances, I want to open an account
   so I can build my savings, I want to make a deposit
   so I can see how much money I have, I want to check the balance
   so I can access my money, I want to make a withdrawal
 date || credit || debit || balance
-09/10/2018 ||  || 500.00 || 2500.00
-09/10/2018 || 2000.00 ||  || 3000.00
-09/10/2018 || 1000.00 ||  || 1000.00
+ 10/10/2018 ||  || 500.00 || 2500.00
+ 10/10/2018 || 2000.00 ||  || 3000.00
+ 10/10/2018 || 1000.00 ||  || 1000.00
   so I can check my cashflows, I want to request a bank statement
 
-Finished in 0.0187 seconds (files took 0.16866 seconds to load)
-16 examples, 0 failures
+Printer
+  #headers
+    prints a formatted headers string
+  #print_transactions
+    will output a formatted bank statement
+
+Finished in 0.0178 seconds (files took 0.16295 seconds to load)
+17 examples, 0 failures
 
 
-COVERAGE: 100.00% -- 89/89 lines in 3 files
+COVERAGE: 100.00% -- 112/112 lines in 5 files
+
+
+
+➜  bank-tech-test git:(master) ✗ rubocop
+Inspecting 7 files
+.......
+
+7 files inspected, no offenses detected
+
+
 
 ```
 
@@ -132,11 +147,13 @@ Project file structure
 │   ├── README.md
 │   └── User_stories.md
 ├── lib
-│   └── account.rb
+│   ├── account.rb
+│   └── printer.rb
 └── spec
     ├── account_spec.rb
     ├── features
     │   └── user_stories_spec.rb
+    ├── printer_spec.rb
     └── spec_helper.rb
 
 ```

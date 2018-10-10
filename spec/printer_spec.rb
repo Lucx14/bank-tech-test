@@ -15,13 +15,13 @@ describe Printer do
   describe '#print_transactions' do
     it 'will output a formatted bank statement' do
       cashflows = [{
-                     date: Time.now,
+                     date: Time.parse('2018-10-10 15:08:34 +0100'),
                      credit: 1000,
                      debit: nil,
                      balance: 1000
                    },
                      {
-                     date: Time.now,
+                     date: Time.parse('2018-10-10 15:08:34 +0100'),
                      credit: 2000,
                      debit: nil,
                      balance: 3000
