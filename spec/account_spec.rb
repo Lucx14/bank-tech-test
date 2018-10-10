@@ -57,12 +57,9 @@ describe Account do
   describe '#statement' do
     it 'prints out a statement of cashflows to the screen with amount, date and balance' do
       account.deposit(1000)
-      account.deposit(2000)
-      account.withdraw(500)
-      expect { account.statement }.to output("date || credit || debit || balance\n "\
-                                             "10/10/2018 ||  || 500.00 || 2500.00 \n "\
-                                             "10/10/2018 || 2000.00 ||  || 3000.00 \n "\
-                                             "10/10/2018 || 1000.00 ||  || 1000.00 \n").to_stdout
+      expect(account).to receive(:headers)
+      expect(account).to receive(:print_transactions)
+      account.statement
     end
   end
 end
