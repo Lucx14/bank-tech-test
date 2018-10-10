@@ -1,4 +1,7 @@
+require './lib/printer.rb'
+
 class Account
+  include Printer
 
   attr_reader :balance, :cashflows
 
@@ -35,10 +38,8 @@ class Account
   end
 
   def statement
-    statement_headers
-    cashflows.reverse_each do |cashflow|
-      puts "#{date_format(cashflow[:date])} || #{decimalize(cashflow[:credit])} || #{decimalize(cashflow[:debit])} || #{decimalize(cashflow[:balance])}"
-    end
+    puts headers
+    puts print_transactions(@cashflows)
   end
 
   private
@@ -49,19 +50,6 @@ class Account
 
   def positive?(amount)
     amount > 0
-  end
-
-  def statement_headers
-    headers = [:date, :credit, :debit, :balance]
-    puts headers.join(" || ")
-  end
-
-  def decimalize(input)
-    "%.2f" % input.to_f unless input.nil?
-  end
-
-  def date_format(date)
-    date.strftime("%d/%m/%Y")
   end
 
 end

@@ -13,7 +13,7 @@ on the morning of the second day, i have a single class (Account) program with a
 
 # Post - coach review
 
-• received feedback from Mark,
+
 
 ```
 To pass, you need fewer than 5 minors and no majors. Feedback below:
@@ -27,4 +27,9 @@ MINORS:
 
 ```
 
-* will work on refactoring this morning based on feedback, will aim to resolve the minor test issue first then move on to better feature tests and lastly i will look at a class extraction to seperate responsibilities. 
+* will work on refactoring this morning based on feedback, will aim to resolve the minor test issue first then move on to better feature tests and lastly i will look at a class extraction to seperate responsibilities.
+
+
+# Update
+
+* Ive tried to extract the printer/formatting of the statement to its own class, i ended up with something that looked like it had only behaviour and no state and so i decided to use it as a module.

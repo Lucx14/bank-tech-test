@@ -6,9 +6,19 @@
 |----------------------------------|
 | Responsibility  | Collaborator   |
 |-----------------|----------------|
-| .balance        | none           |
+| .balance        | Printer module |
 | .deposit        |                |
 | .withdrawal     |                |
-| .print_statement|                |
+|                 |                |
+
+
+| Printer module                        |
+|---------------------------------------|
+| Responsibility      |  Collaborator   |
+|---------------------|-----------------|
+| .print_headers      |                 |
+| .print_transactions |                 |
+|                     |                 |
+
 
 ```
