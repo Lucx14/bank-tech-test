@@ -7,6 +7,8 @@ describe Account do
   describe '#initialize' do
     it 'initializes a new account with a zero balance' do
       expect(account.balance).to eq(0)
+      # do i even need to keep this test, should you test initialization and instance variables??
+      # Marks feedback said i should test behavior not state???
     end
   end
 
@@ -57,7 +59,7 @@ describe Account do
       account.deposit(1000)
       account.deposit(2000)
       account.withdraw(500)
-      expect { account.statement }.to output("date || credit || debit || balance\n09/10/2018 ||  || 500.00 || 2500.00\n09/10/2018 || 2000.00 ||  || 3000.00\n09/10/2018 || 1000.00 ||  || 1000.00\n").to_stdout
+      expect { account.statement }.to output("date || credit || debit || balance\n10/10/2018 ||  || 500.00 || 2500.00\n10/10/2018 || 2000.00 ||  || 3000.00\n10/10/2018 || 1000.00 ||  || 1000.00\n").to_stdout
     end
   end
 end

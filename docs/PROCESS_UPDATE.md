@@ -9,3 +9,22 @@ on the morning of the second day, i have a single class (Account) program with a
 * I have tried to write both feature tests and unit tests, using the user stories i wrote to guide the feature tests. My thoughts at the moment are that maybe because i have only one class the feature tests seem a bit pointless.
 
 * My statement method involves a .each loop with a puts statement that i would like to make more readable if i can, will continue to look at how i can multi line that. Also because i use puts , im getting the statement output printing out inside my RSpec output which isnt very good visually.
+
+
+# Post - coach review
+
+• received feedback from Mark,
+
+```
+To pass, you need fewer than 5 minors and no majors. Feedback below:
+
+MAJORS:
+- Feature tests: your feature tests aren't really testing the requirements, just that there are no errors
+- Object model - you have one class with multiple responsibilities (business logic and presentation)
+
+MINORS:
+- Testing state not behaviour - expect(account.balance).to eq(0)
+
+```
+
+* will work on refactoring this morning based on feedback, will aim to resolve the minor test issue first then move on to better feature tests and lastly i will look at a class extraction to seperate responsibilities. 

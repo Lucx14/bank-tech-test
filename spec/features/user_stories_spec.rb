@@ -12,14 +12,19 @@ describe 'User Stories' do
   # So that I can build my savings
   # I want to be able to make a deposit to my bank account
   it 'so I can build my savings, I want to make a deposit' do
-    expect { account.deposit(1000) }.not_to raise_error
+    account.deposit(1000)
+    expect(account.balance).to eq(1000)
+    # expect { account.deposit(1000) }.not_to raise_error
   end
 
   # As a bank customer
   # So that I can check how much is in my account
   # I want to be able to check my current balance
   it 'so I can see how much money I have, I want to check the balance' do
-    expect(account.balance).to eq(0)
+    account.deposit(1000)
+    account.deposit(2000)
+    account.withdraw(500)
+    expect(account.balance).to eq(2500)
   end
 
   # As a bank customer
@@ -27,6 +32,8 @@ describe 'User Stories' do
   # I want to be able to make a withdrawal from my account
   it 'so I can access my money, I want to make a withdrawal' do
     account.deposit(1000)
+    account.deposit(2000)
+    account.withdraw(500)
     expect { account.withdraw(500) }.not_to raise_error
   end
 
