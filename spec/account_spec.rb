@@ -3,6 +3,7 @@ require 'account'
 describe Account do
 
   subject(:account) { described_class.new }
+  let(:printer) { double :printer }
 
   describe '#initialize' do
     it 'initializes a new account with a zero balance' do
@@ -57,8 +58,8 @@ describe Account do
   describe '#statement' do
     it 'prints out a statement of cashflows to the screen with amount, date and balance' do
       account.deposit(1000)
-      expect(account).to receive(:headers)
-      expect(account).to receive(:print_transactions)
+      expect(printer).to receive(:headers)
+      expect(printer).to receive(:print_transactions)
       account.statement
     end
   end

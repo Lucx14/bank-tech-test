@@ -1,14 +1,12 @@
 require 'printer'
 
-class DummyClass
-end
 
 describe Printer do
-  let(:dc) { Class.new { extend Printer } }
+  subject(:printer) { described_class.new }
 
   describe '#headers' do
     it 'prints a formatted headers string' do
-      expect(dc.headers).to eq("date || credit || debit || balance")
+      expect(printer.headers).to eq("date || credit || debit || balance")
     end
   end
 
@@ -27,7 +25,7 @@ describe Printer do
                      balance: 3000
                      }]
 
-      expect(dc.print_transactions(cashflows)).to eq(" 10/10/2018 || 2000.00 ||  || 3000.00 \n"\
+      expect(printer.print_transactions(cashflows)).to eq(" 10/10/2018 || 2000.00 ||  || 3000.00 \n"\
                                                      " 10/10/2018 || 1000.00 ||  || 1000.00 ")
     end
   end

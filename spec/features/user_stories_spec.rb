@@ -1,6 +1,11 @@
 describe 'User Stories' do
   let(:account) { Account.new }
 
+  # before do
+  #   @fake_time = Time.now
+  #   Time.stub(:now) { @fake_time }
+  # end
+
   # As a bank customer
   # So that I can build my savings
   # I want to be able to make a deposit to my bank account
@@ -37,10 +42,11 @@ describe 'User Stories' do
     account.deposit(1000)
     account.deposit(2000)
     account.withdraw(500)
-    expect { account.statement }.not_to raise_error
+    # Ask about how i should go about mocking the Time.now element
+    # allow(:date).to receive(Time.now).and_return(Time.parse('2018-10-10 15:08:34 +0100'))
     expect { account.statement }.to output("date || credit || debit || balance\n "\
-                                           "10/10/2018 ||  || 500.00 || 2500.00 \n "\
-                                           "10/10/2018 || 2000.00 ||  || 3000.00 \n "\
-                                           "10/10/2018 || 1000.00 ||  || 1000.00 \n").to_stdout
+                                           "12/10/2018 ||  || 500.00 || 2500.00 \n "\
+                                           "12/10/2018 || 2000.00 ||  || 3000.00 \n "\
+                                           "12/10/2018 || 1000.00 ||  || 1000.00 \n").to_stdout
   end
 end

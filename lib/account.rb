@@ -1,10 +1,9 @@
 require './lib/printer.rb'
 
 class Account
-  include Printer
 
   attr_reader :balance, :cashflows
-
+  # Where to inject the printer?? here or every time i want to print something
   def initialize
     @balance = 0
     @cashflows = []
@@ -37,9 +36,9 @@ class Account
 
   end
 
-  def statement
-    puts headers
-    puts print_transactions(@cashflows)
+  def statement(printer = Printer.new)
+    puts printer.headers
+    puts printer.print_transactions(@cashflows)
   end
 
   private

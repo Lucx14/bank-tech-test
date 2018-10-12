@@ -1,4 +1,4 @@
-module Printer
+class Printer
 
   STATEMENT_HEADERS = [:date, :credit, :debit, :balance]
 
