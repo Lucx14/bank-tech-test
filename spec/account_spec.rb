@@ -48,7 +48,7 @@ describe Account do
   end
 
   describe '#statement' do
-    it 'calls #print_statement from printer' do
+    it 'printer can receive print_statement' do
       expect(mock_printer).to receive(:print_statement).with(subject.cashflows)
       account.statement
     end

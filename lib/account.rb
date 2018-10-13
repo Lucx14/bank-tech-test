@@ -3,7 +3,7 @@ require_relative './printer'
 class Account
 
   attr_reader :balance, :cashflows, :printer
-  # Where to inject the printer?? here or every time i want to print something
+
   def initialize(printer = Printer)
     @balance = 0
     @cashflows = []
@@ -48,7 +48,7 @@ class Account
   end
 
   def positive?(amount)
-    amount > 0
+    amount.positive?
   end
 
 end
