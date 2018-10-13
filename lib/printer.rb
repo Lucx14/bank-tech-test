@@ -8,10 +8,10 @@ module Printer
 
   def self.print_transactions(cashflows)
     cashflows.reverse.map do |cashflow|
-      " #{date_format(cashflow[:date])} ||"\
-      " #{decimalize(cashflow[:credit])} ||"\
-      " #{decimalize(cashflow[:debit])} ||"\
-      " #{decimalize(cashflow[:balance])} "
+      " #{date_format(cashflow.date)} ||"\
+      " #{decimalize(cashflow.credit)} ||"\
+      " #{decimalize(cashflow.debit)} ||"\
+      " #{decimalize(cashflow.balance)} "
     end.join("\n")
   end
 

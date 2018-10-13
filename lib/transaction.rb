@@ -2,7 +2,7 @@ class Transaction
 
   attr_reader :balance, :date, :credit, :debit
 
-  def initialize(balance, cash_value)
+  def initialize(balance:, cash_value:)
     @date = Time.now
     @balance = balance
     credit_debit(cash_value)

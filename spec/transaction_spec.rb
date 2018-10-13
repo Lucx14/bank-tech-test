@@ -2,7 +2,7 @@ require 'transaction'
 
 describe Transaction do
 
-  subject(:transaction) { described_class.new(500, 1000) }
+  subject(:transaction) { described_class.new(balance: 500, cash_value: 1000) }
 
   describe '#date' do
     it 'can read the date attribute' do
@@ -31,7 +31,7 @@ describe Transaction do
 
   describe '#initialize' do
     it 'can correctly determine debit or credit' do
-      new_transaction = Transaction.new(1000, -200)
+      new_transaction = Transaction.new(balance: 1000, cash_value: -200)
       expect(new_transaction.credit).to eq(nil)
       expect(new_transaction.debit).to eq(200)
     end
