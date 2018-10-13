@@ -2,16 +2,8 @@ require 'account'
 
 describe Account do
 
-  subject(:account) { described_class.new }
-  let(:printer) { double :printer }
-
-  describe '#initialize' do
-    it 'initializes a new account with a zero balance' do
-      expect(account.balance).to eq(0)
-      # do i even need to keep this test, should you test initialization and instance variables??
-      # Marks feedback said i should test behavior not state???
-    end
-  end
+  let(:mock_printer) { double :mock_printer, print_statement: 'statement' }
+  subject(:account) { described_class.new(mock_printer) }
 
   describe '#deposit' do
     it 'adds money to the account balance' do
@@ -56,10 +48,8 @@ describe Account do
   end
 
   describe '#statement' do
-    it 'prints out a statement of cashflows to the screen with amount, date and balance' do
-      account.deposit(1000)
-      expect(printer).to receive(:headers)
-      expect(printer).to receive(:print_transactions)
+    it 'calls #print_statement from printer' do
+      expect(mock_printer).to receive(:print_statement).with(subject.cashflows)
       account.statement
     end
   end

@@ -1,12 +1,12 @@
-class Printer
+module Printer
 
   STATEMENT_HEADERS = [:date, :credit, :debit, :balance]
 
-  def headers
-    STATEMENT_HEADERS.join(" || ")
+  def self.headers
+    STATEMENT_HEADERS.join(" || ") + "\n"
   end
 
-  def print_transactions(cashflows)
+  def self.print_transactions(cashflows)
     cashflows.reverse.map do |cashflow|
       " #{date_format(cashflow[:date])} ||"\
       " #{decimalize(cashflow[:credit])} ||"\
@@ -15,14 +15,18 @@ class Printer
     end.join("\n")
   end
 
-  private
+  def self.print_statement(cashflows)
+    puts headers + print_transactions(cashflows)
+  end
 
-  def date_format(date)
+  def self.date_format(date)
     date.strftime("%d/%m/%Y")
   end
 
-  def decimalize(input)
+  def self.decimalize(input)
     "%.2f" % input.to_f unless input.nil?
   end
+
+  private_class_method :date_format, :decimalize
 
 end
