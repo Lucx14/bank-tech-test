@@ -54,27 +54,26 @@ example usage in pry or irb
 
 ```
 
+➜  bank-tech-test git:(master) ✗ pry
 [1] pry(main)> require './lib/account.rb'
 => true
 [2] pry(main)> account = Account.new
-=> #<Account:0x00007fccdb24c778 @balance=0, @cashflows=[]>
+=> #<Account:0x00007f947da76318 @balance=0, @cashflows=[], @printer=Printer, @transaction=Transaction>
 [3] pry(main)> account.deposit(1000)
-=> [{:date=>2018-10-10 14:57:43 +0100, :credit=>1000, :debit=>nil, :balance=>1000}]
+=> [#<Transaction:0x00007f947d99dc20 @balance=1000, @credit=1000, @date=2018-10-13 20:16:26 +0100>]
 [4] pry(main)> account.deposit(2000)
-=> [{:date=>2018-10-10 14:57:43 +0100, :credit=>1000, :debit=>nil, :balance=>1000},
- {:date=>2018-10-10 14:57:46 +0100, :credit=>2000, :debit=>nil, :balance=>3000}]
+=> [#<Transaction:0x00007f947d99dc20 @balance=1000, @credit=1000, @date=2018-10-13 20:16:26 +0100>,
+ #<Transaction:0x00007f947d9462e0 @balance=3000, @credit=2000, @date=2018-10-13 20:16:34 +0100>]
 [5] pry(main)> account.withdraw(500)
-=> [{:date=>2018-10-10 14:57:43 +0100, :credit=>1000, :debit=>nil, :balance=>1000},
- {:date=>2018-10-10 14:57:46 +0100, :credit=>2000, :debit=>nil, :balance=>3000},
- {:date=>2018-10-10 14:57:48 +0100, :credit=>nil, :debit=>500, :balance=>2500}]
+=> [#<Transaction:0x00007f947d99dc20 @balance=1000, @credit=1000, @date=2018-10-13 20:16:26 +0100>,
+ #<Transaction:0x00007f947d9462e0 @balance=3000, @credit=2000, @date=2018-10-13 20:16:34 +0100>,
+ #<Transaction:0x00007f947f09b0f8 @balance=2500, @date=2018-10-13 20:16:38 +0100, @debit=500>]
 [6] pry(main)> account.statement
 date || credit || debit || balance
- 10/10/2018 ||  || 500.00 || 2500.00
- 10/10/2018 || 2000.00 ||  || 3000.00
- 10/10/2018 || 1000.00 ||  || 1000.00
+ 13/10/2018 ||  || 500.00 || 2500.00
+ 13/10/2018 || 2000.00 ||  || 3000.00
+ 13/10/2018 || 1000.00 ||  || 1000.00
 => nil
-[7] pry(main)> account.balance
-=> 2500
 
 ```
 
@@ -83,32 +82,24 @@ To see test coverage run Rspec in the command line
 
 ```
 Account
-  #initialize
-    initializes a new account with a zero balance
   #deposit
+    creates a new Transaction object
     adds money to the account balance
     only accepts integer values as argument
     only accepts positive numbers
-    creates a record of the cashflow with date and resulting balance
   #withdrawal
+    creates a new Transaction object
     changes the balance by the amount
     only accepts integer values as argument
     only accepts positive numbers
     will not allow withdrawals larger than the current balance
-    creates a record of the cashflow with date and resulting balance
   #statement
-
-
-    prints out a statement of cashflows to the screen with amount, date and balance
+    printer can receive print_statement
 
 User Stories
   so I can build my savings, I want to make a deposit
   so I can see how much money I have, I want to check the balance
   so I can access my money, I want to make a withdrawal
-date || credit || debit || balance
- 10/10/2018 ||  || 500.00 || 2500.00
- 10/10/2018 || 2000.00 ||  || 3000.00
- 10/10/2018 || 1000.00 ||  || 1000.00
   so I can check my cashflows, I want to request a bank statement
 
 Printer
@@ -116,20 +107,32 @@ Printer
     prints a formatted headers string
   #print_transactions
     will output a formatted bank statement
+  #print_statement
+    prints a formatted bank statement
 
-Finished in 0.0178 seconds (files took 0.16295 seconds to load)
-17 examples, 0 failures
+Transaction
+  #date
+    can read the date attribute
+  #credt
+    can read the credit attribute
+  #debit
+    can read the debit attribute
+  #balance
+    can read the balance attribute
+  #initialize
+    can correctly determine debit or credit
+
+Finished in 0.01355 seconds (files took 0.15405 seconds to load)
+22 examples, 0 failures
 
 
-COVERAGE: 100.00% -- 112/112 lines in 5 files
-
-
+COVERAGE: 100.00% -- 145/145 lines in 7 files
 
 ➜  bank-tech-test git:(master) ✗ rubocop
-Inspecting 7 files
-.......
+Inspecting 10 files
+..........
 
-7 files inspected, no offenses detected
+10 files inspected, no offenses detected
 
 
 
@@ -142,6 +145,7 @@ Project file structure
 .
 ├── Gemfile
 ├── Gemfile.lock
+├── Rakefile
 ├── coverage
 ├── docs
 │   ├── CRC_Cards.md
@@ -150,12 +154,14 @@ Project file structure
 │   └── User_stories.md
 ├── lib
 │   ├── account.rb
-│   └── printer.rb
+│   ├── printer.rb
+│   └── transaction.rb
 └── spec
     ├── account_spec.rb
     ├── features
     │   └── user_stories_spec.rb
     ├── printer_spec.rb
-    └── spec_helper.rb
+    ├── spec_helper.rb
+    └── transaction_spec.rb
 
 ```
